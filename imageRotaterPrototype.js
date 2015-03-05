@@ -9,25 +9,19 @@ function slider(numPics, imgWidth, myDiv, mySeconds, myName){
 	this.myPos = myDiv;
 	this.imgWidth = imgWidth;
 	this.seconds = mySeconds;
-	this.name = myName;
+	this.myName = myName;
 	this.numPics = numPics;
-
-	this.intialize = intialize;
-	this.intialize(this.numPics, this.imgWidth, this.myDiv, this.name);
+	this.newPos = 0;
+	this.myArray = new Array;
+	this.myCounter = 0;
+	this.total = 0;
+	this.curPos = 0;
+	this.difPos = 0;
+	this.times;
+	
+	console.log('NumPics is: ' + numPics + ' imgWidth is:' + imgWidth + ' myDiv is:' + myDiv + ' name is:' + myName);
+	this.intialize(numPics, imgWidth, myDiv, myName);
 }	
-
-slider.prototype.newPos = 0;
-slider.prototype.myArray = new Array;
-slider.prototype.myCounter = 0;
-slider.prototype.total = 0;
-slider.prototype.curPos = 0;
-slider.prototype.difPos = 0;
-slider.prototype.times;
-
-
-
-
-
 
 
 
@@ -36,7 +30,7 @@ numPics = number of divisons to slide through,
 imgwidth =  the width of the container,
 myDiv = name of div that slides
 */
-function intialize(numPics, imgWidth, myDiv, myName){
+slider.prototype.intialize = function intialize(numPics, imgWidth, myDiv, myName){
 /* this part sets up the go to buttons to go to a particular slide */
 $(document).ready(function() {
 var contentAdded= '';
@@ -69,7 +63,7 @@ $(this.myPos).stop().animate({
 		left:this.curPos
 		}, 800, function (){});
 		$('.centerIt span').css('color', 'inherit');
-		var mybg = '#' + this.name + this.newPos;
+		var mybg = '#' + this.myName + this.newPos;
 		$(mybg).css('color', 'blue');
 		console.log('move next called');
 }
@@ -85,7 +79,7 @@ $(this.myPos).stop().animate({
 		left:this.curPos
 		}, 800, function (){});
 		$('.centerIt span').css('color', 'inherit');
-		var mybg = '#' + this.name + this.newPos;
+		var mybg = '#' + this.myName + this.newPos;
 		$(mybg).css('color', 'blue');
 		console.log('move prev called');
 }
@@ -98,14 +92,14 @@ $(this.myPos).stop().animate({
 		left:this.difPos
 		}, 800, function (){});
 		$('.centerIt span').css('color', 'inherit');
-		var mybg = '#' + this.name + arrayNo;
+		var mybg = '#' + this.myName + arrayNo;
 		$(mybg).css('color', 'blue');
 	
 }
 
 slider.prototype.timedCount = function(){
 	this.moveNext();
-	myMethod = this.name + '.timedCount()'; 
+	myMethod = this.myName + '.timedCount()'; 
 	times = setTimeout(myMethod, this.seconds);
 	console.log('timed count called');
 	}
